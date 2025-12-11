@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>돌봄다리 - 장기요양기관 통합 솔루션</title>
+    <meta name="description" content="인력 매칭, 커뮤니티, AI 행정 비서까지. 14일 걸리던 채용을 2일로 단축하는 돌봄다리">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌉</text></svg>">
+    
+    <style>
+        :root {
+            --primary-navy: #1A365D;
+            --primary-blue: #3182CE;
+            --primary-light: #63B3ED;
+            --accent-warm: #ED8936;
+            --accent-green: #38A169;
+            --bg-cream: #FFFAF5;
+            --bg-light: #F7FAFC;
+            --bg-blue-light: #EBF8FF;
+            --text-dark: #2D3748;
+            --text-gray: #718096;
+            --text-light: #A0AEC0;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+            background: var(--bg-blue-light);
+        }
+
+        .nav-cta {
+            background: var(--primary-blue) !important;
+            color: white !important;
+            margin-left: 8px;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-navy) !important;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-dark);
+            margin: 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(165deg, var(--bg-cream) 0%, var(--white) 50%, var(--bg-blue-light) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(99, 179, 237, 0.15) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(237, 137, 54, 0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.05); }
+        }
+
+        .hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--white);
+            border: 1px solid rgba(49, 130, 206, 0.2);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-badge::before {
+            content: '✨';
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.3;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .hero h1 .highlight {
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: rgba(99, 179, 237, 0.3);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin: 32px 0;
+            padding: 24px 0;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .hero-stat-value small {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-top: 4px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            color: white;
+            box-shadow: 0 4px 20px rgba(49, 130, 206, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(49, 130, 206, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-navy);
+            border: 2px solid rgba(26, 54, 93, 0.15);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background: var(--bg-blue-light);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            background: linear-gradient(145deg, var(--white), var(--bg-light));
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-mockup {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-content {
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+
+        .mockup-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .mockup-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .hero-float-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: floatCard 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-float-card.card-1 {
+            top: 10%;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .hero-float-card.card-2 {
+            bottom: 20%;
+            left: -30px;
+            animation-delay: 1s;
+        }
+
+        .float-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .float-card-icon.blue {
+            background: var(--bg-blue-light);
+        }
+
+        .float-card-icon.green {
+            background: #C6F6D5;
+        }
+
+        .float-card-text {
+            font-size: 0.85rem;
+        }
+
+        .float-card-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .float-card-desc {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+        }
+
+        /* ==================== SERVICES ==================== */
+        .services {
+            padding: 120px 24px;
+            background: var(--white);
+        }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 16px;
+            word-break: keep-all;
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+        }
+
+        .service-icon.blue {
+            background: linear-gradient(135deg, var(--bg-blue-light), #BEE3F8);
+        }
+
+        .service-icon.green {
+            background: linear-gradient(135deg, #C6F6D5, #9AE6B4);
+        }
+
+        .service-icon.yellow {
+            background: linear-gradient(135deg, #FEFCBF, #FAF089);
+        }
+
+        .service-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+
+        .service-badge.main {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .service-badge.kakao {
+            background: #FEE500;
+            color: #3C1E1E;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        /* ==================== PROBLEMS ==================== */
+        .problems {
+            padding: 120px 24px;
+            background: linear-gradient(180deg, var(--bg-light) 0%, var(--white) 100%);
+        }
+
+        .problems-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .problems-text h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 32px;
+            word-break: keep-all;
+        }
+
+        .problem-list {
+            list-style: none;
+        }
+
+        .problem-item {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .problem-item:last-child {
+            border-bottom: none;
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #FED7D7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+
+        .problem-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .problem-content p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .problems-visual {
+            position: relative;
+        }
+
+        .comparison-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .comparison-header div {
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .comparison-header .before {
+            background: #FED7D7;
+            color: #C53030;
+        }
+
+        .comparison-header .after {
+            background: #C6F6D5;
+            color: #276749;
+        }
+
+        .comparison-body {
+            padding: 32px;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+
+        .comparison-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .comparison-value.red {
+            color: #E53E3E;
+        }
+
+        .comparison-value.green {
+            color: var(--accent-green);
+        }
+
+        /* ==================== FEATURES ==================== */
+        .features {
+            padding: 120px 24px;
+            background: var(--white);
+        }
+
+        .feature-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .feature-block.reverse {
+            direction: rtl;
+        }
+
+        .feature-block.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-content {
+            max-width: 520px;
+        }
+
+        .feature-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 16px;
+        }
+
+        .feature-content h3 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            word-break: keep-all;
+        }
+
+        .feature-content p {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            width: 24px;
+            height: 24px;
+            background: var(--bg-blue-light);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .feature-visual {
+            background: linear-gradient(145deg, var(--bg-light), var(--white));
+            border-radius: var(--radius-xl);
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-mockup {
+            aspect-ratio: 4/3;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .feature-mockup.matching {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .feature-mockup.community {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .feature-mockup.chatbot {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        /* ==================== STATS ==================== */
+        .stats {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #2C5282 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .stats-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #fff 0%, #E2E8F0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ==================== TESTIMONIAL ==================== */
+        .testimonial {
+            padding: 120px 24px;
+            background: var(--bg-cream);
+        }
+
+        .testimonial-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            padding: 60px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-size: 8rem;
+            color: var(--bg-blue-light);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-quote {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1;
+            word-break: keep-all;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .testimonial-info {
+            text-align: left;
+        }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .testimonial-role {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* ==================== CTA ==================== */
+        .cta {
+            padding: 120px 24px;
+            background: var(--white);
+        }
+
+        .cta-card {
+            max-width: 900px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #2C5282 50%, var(--primary-blue) 100%);
+            border-radius: var(--radius-xl);
+            padding: 80px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .cta-card h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-card p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-navy);
+        }
+
+        .btn-white:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: var(--primary-navy);
+            color: white;
+            padding: 80px 24px 40px;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand .logo-icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .footer-desc {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-blue);
+        }
+
+        .footer-column h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-legal a {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+        }
+
+        .footer-legal a:hover {
+            color: white;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .hero-float-card.card-1 {
+                right: 0;
+            }
+
+            .hero-float-card.card-2 {
+                left: 0;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .problems-content,
+            .feature-block,
+            .feature-block.reverse {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .feature-block.reverse {
+                direction: ltr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .hero-stat {
+                text-align: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .comparison-header,
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .comparison-header .before,
+            .comparison-header .after {
+                padding: 12px;
+            }
+
+            .testimonial-card {
+                padding: 40px 24px;
+            }
+
+            .testimonial-quote {
+                font-size: 1.1rem;
+            }
+
+            .cta-card {
+                padding: 48px 24px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">🌉</div>
+                <span>돌봄다리</span>
+            </a>
+            <nav>
+                <a href="#services">서비스</a>
+                <a href="#features">주요기능</a>
+                <a href="#about">회사소개</a>
+                <a href="#contact">문의하기</a>
+                <a href="#" class="nav-cta">시작하기</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="메뉴">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">베타 서비스 무료 이용 중</div>
+                <h1>
+                    기관장님의 고민은 덜고,<br>
+                    현장의 <span class="highlight">돌봄</span>은 잇습니다.
+                </h1>
+                <p class="hero-desc">
+                    데이터 기반 인력 매칭부터 기관장 커뮤니티까지,<br>
+                    장기요양기관을 위한 통합 솔루션
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">14일 → 2<small>일</small></div>
+                        <div class="hero-stat-label">채용 소요 시간</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">133<small>개</small></div>
+                        <div class="hero-stat-label">협약 기관</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">30<small>초</small></div>
+                        <div class="hero-stat-label">AI 응답 시간</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">기관장님 입장하기 →</a>
+                    <a href="#" class="btn btn-secondary">교육원장님 입장하기</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <div class="hero-mockup">
+                        <div class="mockup-content">
+                            <div class="mockup-icon">📱</div>
+                            <div class="mockup-text">돌봄다리 앱 화면<br>이미지 삽입 영역</div>
+                        </div>
+                    </div>
+                    <div class="hero-float-card card-1">
+                        <div class="float-card-icon blue">🤝</div>
+                        <div class="float-card-text">
+                            <div class="float-card-title">매칭 완료!</div>
+                            <div class="float-card-desc">새로운 요양보호사가 배정되었습니다</div>
+                        </div>
+                    </div>
+                    <div class="hero-float-card card-2">
+                        <div class="float-card-icon green">✓</div>
+                        <div class="float-card-text">
+                            <div class="float-card-title">자격증 검증 완료</div>
+                            <div class="float-card-desc">요양보호사 1급 확인됨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Services</div>
+                <h2 class="section-title">돌봄다리가 도와드리는 것들</h2>
+                <p class="section-desc">인력 매칭, 커뮤니티, AI 비서까지. 현장의 어려움을 하나씩 해결합니다.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon blue">🤝</div>
+                    <span class="service-badge main">★ Main</span>
+                    <h3>AI 인력 매칭</h3>
+                    <p>성향까지 분석하는 AI 스마트 매칭. 검증된 요양보호사를 가장 빠르게 연결합니다.</p>
+                    <a href="#" class="service-link">자세히 보기 →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon green">💬</div>
+                    <span class="service-badge main">★ Main</span>
+                    <h3>기관장 커뮤니티</h3>
+                    <p>혼자 고민하지 마세요. 지역 연합회 중심의 진짜 소통 공간입니다.</p>
+                    <a href="#" class="service-link">자세히 보기 →</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon yellow">🤖</div>
+                    <span class="service-badge kakao">KakaoTalk</span>
+                    <h3>AI 행정 비서</h3>
+                    <p>복잡한 법령, 급여 기준? 카카오톡으로 물어보면 AI가 실시간으로 답해드립니다.</p>
+                    <a href="#" class="service-link">채널 추가하기 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="problems">
+        <div class="section-inner">
+            <div class="problems-content">
+                <div class="problems-text">
+                    <div class="section-label">Pain Points</div>
+                    <h2>혹시 이런 경험,<br>있으신가요?</h2>
+                    <ul class="problem-list">
+                        <li class="problem-item">
+                            <div class="problem-icon">😰</div>
+                            <div class="problem-content">
+                                <h4>"구인 공고 올린 지 2주, 아직도 연락이 없어요"</h4>
+                                <p>적합한 인력을 찾는 데 너무 오래 걸립니다</p>
+                            </div>
+                        </li>
+                        <li class="problem-item">
+                            <div class="problem-icon">😓</div>
+                            <div class="problem-content">
+                                <h4>"면접 보고 채용했는데 일주일 만에 퇴사했어요"</h4>
+                                <p>미스매칭으로 인한 조기 퇴사가 반복됩니다</p>
+                            </div>
+                        </li>
+                        <li class="problem-item">
+                            <div class="problem-icon">😫</div>
+                            <div class="problem-content">
+                                <h4>"카톡방 공지가 채팅에 묻혀서 아무도 확인 안 해요"</h4>
+                                <p>중요한 정보 전달이 어렵습니다</p>
+                            </div>
+                        </li>
+                        <li class="problem-item">
+                            <div class="problem-icon">🤯</div>
+                            <div class="problem-content">
+                                <h4>"급여 기준이 또 바뀌었다는데 어디서 찾아야 하죠?"</h4>
+                                <p>30분 검색해도 확신이 없습니다</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="problems-visual">
+                    <div class="comparison-card">
+                        <div class="comparison-header">
+                            <div class="before">❌ 기존 방식</div>
+                            <div class="after">✓ 돌봄다리</div>
+                        </div>
+                        <div class="comparison-body">
+                            <div class="comparison-row">
+                                <div>
+                                    <div class="comparison-label">채용 소요 시간</div>
+                                    <div class="comparison-value red">14일</div>
+                                </div>
+                                <div>
+                                    <div class="comparison-label">채용 소요 시간</div>
+                                    <div class="comparison-value green">2일</div>
+                                </div>
+                            </div>
+                            <div class="comparison-row">
+                                <div>
+                                    <div class="comparison-label">조기 퇴사율</div>
+                                    <div class="comparison-value red">40%</div>
+                                </div>
+                                <div>
+                                    <div class="comparison-label">조기 퇴사율</div>
+                                    <div class="comparison-value green">10%</div>
+                                </div>
+                            </div>
+                            <div class="comparison-row">
+                                <div>
+                                    <div class="comparison-label">정보 검색 시간</div>
+                                    <div class="comparison-value red">30분</div>
+                                </div>
+                                <div>
+                                    <div class="comparison-label">정보 검색 시간</div>
+                                    <div class="comparison-value green">30초</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Features</div>
+                <h2 class="section-title">이렇게 해결해 드립니다</h2>
+                <p class="section-desc">현장에서 검증된 기능들로 실질적인 변화를 만듭니다.</p>
+            </div>
+            <div class="feature-blocks">
+                <!-- Feature 1: 매칭 -->
+                <div class="feature-block">
+                    <div class="feature-content">
+                        <div class="feature-number">01</div>
+                        <h3>AI 성향 분석 매칭</h3>
+                        <p>단순 조건 매칭을 넘어, 어르신과 요양보호사의 성향까지 분석합니다. 케어 스타일이 맞아야 오래 함께할 수 있으니까요.</p>
+                        <ul class="feature-list">
+                            <li>성향 데이터 기반 미스매칭 최소화</li>
+                            <li>자격증, 경력, 거리 한눈에 확인</li>
+                            <li>공고 등록부터 계약까지 원스톱</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="feature-mockup matching">
+                            <div class="mockup-content">
+                                <div class="mockup-icon">🤝</div>
+                                <div class="mockup-text">매칭 화면<br>이미지 삽입 영역</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: 커뮤니티 -->
+                <div class="feature-block reverse">
+                    <div class="feature-content">
+                        <div class="feature-number">02</div>
+                        <h3>기관장 전용 커뮤니티</h3>
+                        <p>카톡방에 묻히는 중요한 공지들. 이제 체계적으로 관리하세요. 133개 기관장의 운영 노하우가 모입니다.</p>
+                        <ul class="feature-list">
+                            <li>인증된 기관장만 참여하는 폐쇄형</li>
+                            <li>공지 고정 + 실시간 푸시 알림</li>
+                            <li>정보 아카이빙 및 검색 기능</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="feature-mockup community">
+                            <div class="mockup-content">
+                                <div class="mockup-icon">💬</div>
+                                <div class="mockup-text">커뮤니티 화면<br>이미지 삽입 영역</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3: 챗봇 -->
+                <div class="feature-block">
+                    <div class="feature-content">
+                        <div class="feature-number">03</div>
+                        <h3>카카오톡 AI 행정 비서</h3>
+                        <p>별도 앱 설치 없이, 익숙한 카카오톡에서 바로. 복잡한 법령도 친구에게 물어보듯 쉽게 답을 얻으세요.</p>
+                        <ul class="feature-list">
+                            <li>공단 고시 기반 정확한 답변</li>
+                            <li>출처 고시 번호와 함께 제공</li>
+                            <li>매년 바뀌는 기준 실시간 반영</li>
+                        </ul>
+                    </div>
+                    <div class="feature-visual">
+                        <div class="feature-mockup chatbot">
+                            <div class="mockup-content">
+                                <div class="mockup-icon">🤖</div>
+                                <div class="mockup-text">카카오톡 챗봇<br>이미지 삽입 영역</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-inner">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">133+</div>
+                    <div class="stat-label">협약 기관</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2일</div>
+                    <div class="stat-label">평균 매칭 시간</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">30초</div>
+                    <div class="stat-label">AI 응답 시간</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">10%</div>
+                    <div class="stat-label">조기 퇴사율</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial" id="about">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title">현장에서 시작된 솔루션</h2>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-quote">
+                    "30분을 검색하고, 그래도 확신이 없어 동료에게 물었습니다.<br>
+                    같은 대답이 돌아왔죠. '나도 잘 모르겠어.'<br><br>
+                    재가복지 현장에서 일하시는 분들이 매일 겪는 일입니다.<br>
+                    그래서 저희는 직접 현장을 찾아갔습니다."
+                </p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">👩‍💼</div>
+                    <div class="testimonial-info">
+                        <div class="testimonial-name">박여경</div>
+                        <div class="testimonial-role">돌봄다리 대표</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="section-inner">
+            <div class="cta-card">
+                <h2>돌봄다리와 함께 시작하세요</h2>
+                <p>서비스 도입 문의, 파트너십 제안 등 무엇이든 편하게 연락주세요.<br>현재 베타 서비스 무료 이용 중입니다.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-white">무료로 시작하기</a>
+                    <a href="#" class="btn btn-outline">문의하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">🌉</div>
+                        <span>돌봄다리</span>
+                    </a>
+                    <p class="footer-desc">
+                        돌봄을 연결하는 다리, 돌봄다리.<br>
+                        장기요양기관 종사자를 위한 AI 기반 업무 지원 솔루션입니다.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="카카오톡">💬</a>
+                        <a href="#" aria-label="인스타그램">📷</a>
+                        <a href="#" aria-label="블로그">📝</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>서비스</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">인력 매칭</a></li>
+                        <li><a href="#">기관장 커뮤니티</a></li>
+                        <li><a href="#">AI 행정 비서</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>회사</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">회사 소개</a></li>
+                        <li><a href="#">팀 소개</a></li>
+                        <li><a href="#">연혁</a></li>
+                        <li><a href="#">오시는 길</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>고객지원</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">문의하기</a></li>
+                        <li><a href="#">파트너십</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 돌봄다리. All rights reserved.
+                </div>
+                <div class="footer-legal">
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .feature-block, .problem-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

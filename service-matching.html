@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 인력 매칭 - 돌봄다리</title>
+    <meta name="description" content="14일 걸리던 채용을 2일로. AI가 분석하는 스마트 매칭으로 검증된 요양보호사를 빠르게 연결합니다.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌉</text></svg>">
+    
+    <style>
+        :root {
+            --primary-navy: #1A365D;
+            --primary-blue: #3182CE;
+            --primary-light: #63B3ED;
+            --accent-purple: #805AD5;
+            --accent-green: #38A169;
+            --bg-cream: #FFFAF5;
+            --bg-light: #F7FAFC;
+            --bg-blue-light: #EBF8FF;
+            --bg-purple-light: #FAF5FF;
+            --text-dark: #2D3748;
+            --text-gray: #718096;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background: var(--white);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-blue);
+            background: var(--bg-blue-light);
+        }
+
+        .nav-cta {
+            background: var(--primary-blue) !important;
+            color: white !important;
+            margin-left: 8px;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-navy) !important;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 140px 24px 80px;
+            background: linear-gradient(165deg, var(--bg-purple-light) 0%, var(--white) 50%, var(--bg-blue-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(128,90,213,0.1) 0%, transparent 70%);
+        }
+
+        .page-hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-gray);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-blue);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .page-hero h1 .highlight {
+            color: var(--accent-purple);
+            position: relative;
+        }
+
+        .page-hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: rgba(128,90,213,0.2);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .page-hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 28px;
+            line-height: 1.8;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .hero-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--white);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), #6B46C1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(128,90,213,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(128,90,213,0.4);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-navy);
+            border: 2px solid rgba(26,54,93,0.15);
+            margin-left: 12px;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-mockup {
+            background: linear-gradient(145deg, var(--white), var(--bg-light));
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .mockup-screen {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-lg);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-content {
+            padding: 40px;
+        }
+
+        .mockup-icon {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+        }
+
+        .mockup-text {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .mockup-label {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.3);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 24px;
+        }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-gray);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* Steps */
+        .steps-section {
+            background: var(--bg-light);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12%;
+            right: 12%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--primary-blue));
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+
+        .step-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--accent-purple), #6B46C1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            font-size: 0.88rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Features */
+        .feature-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .feature-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-block.reverse {
+            direction: rtl;
+        }
+
+        .feature-block.reverse > * {
+            direction: ltr;
+        }
+
+        .feature-content h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-content h3 span {
+            font-size: 1.8rem;
+        }
+
+        .feature-content > p {
+            font-size: 1.02rem;
+            color: var(--text-gray);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            width: 22px;
+            height: 22px;
+            background: var(--bg-purple-light);
+            color: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-visual {
+            background: linear-gradient(145deg, var(--bg-light), var(--white));
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-screen {
+            aspect-ratio: 4/3;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .feature-screen.purple {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .feature-screen.blue {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .feature-screen.green {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: linear-gradient(135deg, var(--accent-purple), #6B46C1);
+            padding: 60px 24px;
+            margin: 0;
+        }
+
+        .stats-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .stat-item p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 100px 24px;
+            background: var(--bg-light);
+        }
+
+        .cta-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary-navy), #2C5282);
+            border-radius: var(--radius-xl);
+            padding: 60px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .cta-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .cta-card p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--primary-navy);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.4);
+            margin-left: 12px;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-navy);
+            color: white;
+            padding: 48px 24px;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .footer-logo .logo-icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .page-hero-inner,
+            .feature-block,
+            .feature-block.reverse {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .feature-block.reverse {
+                direction: ltr;
+            }
+
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid::before {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+
+            .page-hero {
+                padding: 120px 24px 60px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .cta-card {
+                padding: 40px 24px;
+            }
+
+            .cta-card .btn {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+            }
+
+            .btn-ghost {
+                margin-left: 0;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🌉</div>
+                <span>돌봄다리</span>
+            </a>
+            <nav>
+                <a href="index.html">홈</a>
+                <a href="#" class="active">서비스</a>
+                <a href="about.html">회사소개</a>
+                <a href="support.html">고객지원</a>
+                <a href="contact.html" class="nav-cta">문의하기</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <div class="page-hero-content">
+                <div class="breadcrumb">
+                    <a href="index.html">홈</a>
+                    <span>›</span>
+                    <span>서비스</span>
+                    <span>›</span>
+                    <span>인력 매칭</span>
+                </div>
+                <h1>
+                    <span class="highlight">14일</span> 걸리던 채용,<br>
+                    <span class="highlight">2일</span>로 단축됩니다.
+                </h1>
+                <p class="page-hero-desc">
+                    AI가 어르신과 요양보호사의 성향까지 분석합니다.<br>
+                    단순 조건 매칭이 아닌, 케어 스타일까지 고려한 스마트 매칭.
+                </p>
+                <div class="hero-tags">
+                    <span class="hero-tag">✓ AI 성향 분석</span>
+                    <span class="hero-tag">✓ 자격증 사전 검증</span>
+                    <span class="hero-tag">✓ 원스톱 채용</span>
+                </div>
+                <div>
+                    <a href="#" class="btn btn-primary">앱 다운로드 →</a>
+                    <a href="contact.html" class="btn btn-secondary">도입 문의</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-mockup">
+                    <div class="mockup-screen">
+                        <div class="mockup-content">
+                            <div class="mockup-icon">📱</div>
+                            <div class="mockup-text">매칭 앱 메인 화면<br>스크린샷 삽입</div>
+                        </div>
+                        <div class="mockup-label">📸 앱 화면 이미지</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="section steps-section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">How it Works</div>
+                <h2 class="section-title">이렇게 진행됩니다</h2>
+                <p class="section-desc">4단계로 간편하게, 검증된 요양보호사를 만나보세요.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">📝</div>
+                    <h3>공고 등록</h3>
+                    <p>필요한 조건과 케어 유형을 입력하면 AI가 분석을 시작합니다.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🤖</div>
+                    <h3>AI 매칭</h3>
+                    <p>성향, 거리, 경력을 종합 분석해 최적의 후보 5명을 추천합니다.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🤝</div>
+                    <h3>면접 제안</h3>
+                    <p>앱 내에서 바로 면접 일정을 조율하고 화상 면접도 가능합니다.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">✅</div>
+                    <h3>채용 완료</h3>
+                    <p>전자 근로계약까지 앱 하나로 완료. 평균 2일이면 충분합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-label">Key Features</div>
+                <h2 class="section-title">핵심 기능</h2>
+            </div>
+
+            <!-- Feature 1 -->
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h3><span>🎯</span> AI 성향 분석 매칭</h3>
+                    <p>
+                        단순 조건 매칭을 넘어, 어르신과 요양보호사의 성향까지 분석합니다.
+                        케어 스타일이 맞아야 오래 함께할 수 있으니까요.
+                    </p>
+                    <ul class="feature-list">
+                        <li>어르신 선호 케어 스타일 사전 파악</li>
+                        <li>요양보호사 성향 데이터와 정밀 매칭</li>
+                        <li>미스매칭으로 인한 조기 퇴사 40%→10% 감소</li>
+                        <li>장기 근속 가능한 돌봄 관계 형성</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-screen purple">
+                        <div class="mockup-content">
+                            <div class="mockup-icon">🎯</div>
+                            <div class="mockup-text">성향 분석 결과 화면<br>스크린샷 삽입</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="feature-block reverse">
+                <div class="feature-content">
+                    <h3><span>✅</span> 사전 검증 시스템</h3>
+                    <p>
+                        자격증, 경력, 교육 이수 여부를 미리 확인해드립니다.
+                        면접 전에 기본 검증이 완료되니 안심하세요.
+                    </p>
+                    <ul class="feature-list">
+                        <li>요양보호사 자격증 진위 여부 자동 확인</li>
+                        <li>경력 증명서 및 재직 기간 검증</li>
+                        <li>치매 전문 교육 이수 여부 표시</li>
+                        <li>파트너 교육원 수료 인증 뱃지 부여</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-screen blue">
+                        <div class="mockup-content">
+                            <div class="mockup-icon">✅</div>
+                            <div class="mockup-text">자격 검증 완료 화면<br>스크린샷 삽입</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-block">
+                <div class="feature-content">
+                    <h3><span>📊</span> 원스톱 채용 관리</h3>
+                    <p>
+                        공고 등록부터 면접 제안, 근로계약까지.
+                        앱 하나로 채용 전 과정을 관리하세요.
+                    </p>
+                    <ul class="feature-list">
+                        <li>채용 현황 실시간 대시보드 제공</li>
+                        <li>지원자 프로필 비교 기능</li>
+                        <li>앱 내 일정 조율 및 화상 면접</li>
+                        <li>전자 근로계약서 작성 및 서명</li>
+                    </ul>
+                </div>
+                <div class="feature-visual">
+                    <div class="feature-screen green">
+                        <div class="mockup-content">
+                            <div class="mockup-icon">📊</div>
+                            <div class="mockup-text">채용 대시보드 화면<br>스크린샷 삽입</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h4>14일 → 2일</h4>
+                <p>평균 채용 소요 시간</p>
+            </div>
+            <div class="stat-item">
+                <h4>40% → 10%</h4>
+                <p>조기 퇴사율 감소</p>
+            </div>
+            <div class="stat-item">
+                <h4>133+</h4>
+                <p>협약 기관</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h2>지금 바로 시작하세요</h2>
+            <p>베타 서비스 기간 동안 무료로 이용하실 수 있습니다.</p>
+            <div>
+                <a href="#" class="btn btn-white">앱 다운로드</a>
+                <a href="contact.html" class="btn btn-ghost">도입 문의하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <a href="index.html" class="footer-logo">
+                <div class="logo-icon">🌉</div>
+                <span>돌봄다리</span>
+            </a>
+            <div class="footer-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">회사소개</a>
+                <a href="#">서비스</a>
+                <a href="support.html">고객지원</a>
+                <a href="contact.html">문의하기</a>
+            </div>
+            <div class="footer-copyright">
+                © 2025 돌봄다리. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
