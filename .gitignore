@@ -1,0 +1,5 @@
+# 비공개 자료 (사업자등록증 등)
+private/
+
+# macOS
+.DS_Store

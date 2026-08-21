@@ -106,7 +106,26 @@
             .footer-inner { flex-direction: column; text-align: center; }
             .footer-links { flex-wrap: wrap; justify-content: center; }
         }
-    </style>
+    
+        /* ==================== FOOTER: 사업자 정보 ==================== */
+        .footer-biz {
+            max-width: 1280px;
+            margin: 32px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            font-size: 0.8rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.5);
+            text-align: left;
+        }
+        .footer-biz strong { font-weight: 600; color: rgba(255,255,255,0.7); margin-right: 6px; }
+        .footer-biz .sep { margin: 0 10px; opacity: 0.3; }
+        @media (max-width: 640px) {
+            .footer-biz { font-size: 0.75rem; text-align: center; }
+            .footer-biz .sep { display: none; }
+            .footer-biz span { display: block; }
+        }
+</style>
 </head>
 <body>
     <header>
@@ -192,7 +211,7 @@
 
                 <div class="info-card">
                     <div class="info-card-title"><span>📍</span> 주소</div>
-                    <p>서울특별시 서대문구 이화여대길 52<br>이화여자대학교</p>
+                    <p>서울특별시 서대문구 성산로 512-42, 2층 201호<br>(대신동, 이화 스타트업 이룸센터)</p>
                 </div>
 
                 <a href="http://pf.kakao.com/_xczamn"
@@ -231,6 +250,21 @@
                 <a href="support.html">고객지원</a>
             </div>
             <div class="footer-copyright">© 2025 돌봄다리. All rights reserved.</div>
+        </div>
+        <div class="footer-biz">
+            <p>
+                <span><strong>상호</strong>돌봄테크</span><span class="sep">|</span>
+                <span><strong>대표자</strong>박여경</span><span class="sep">|</span>
+                <span><strong>사업자등록번호</strong>408-32-54225</span>
+            </p>
+            <p>
+                <span><strong>주소</strong>서울특별시 서대문구 성산로 512-42, 2층 201호 (대신동, 이화 스타트업 이룸센터)</span>
+            </p>
+            <p>
+                <span><strong>이메일</strong>carebridges.corp@gmail.com</span><span class="sep">|</span>
+                <span><strong>전화</strong>010-4363-0412</span><span class="sep">|</span>
+                <span><strong>업종</strong>정보통신업 · 광고 대행업 · 고용 알선업</span>
+            </p>
         </div>
     </footer>
 
